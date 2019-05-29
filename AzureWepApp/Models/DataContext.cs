@@ -1,4 +1,5 @@
-﻿using Microsoft.Azure.KeyVault;
+﻿using KeyVaultLib;
+using Microsoft.Azure.KeyVault;
 using Microsoft.Azure.Services.AppAuthentication;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -11,11 +12,13 @@ namespace AddressWebApp.Models
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            //var connectionString = GetSecret.DefaultConnectionString().Result;
+            var connectionString = KeyVaultService.GetSecret().Result;
             var builder = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json");
             var configuration = builder.Build();
-            optionsBuilder.UseSqlServer(configuration["ConnectionStrings:DefaultConnection"]);
+            optionsBuilder.UseSqlServer(connectionString);
         }
 
         public DbSet<Address> Addresses { get; set; }

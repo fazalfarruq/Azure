@@ -49,7 +49,7 @@ namespace MyAddressBookPlus
                 var keyVaultClient = new KeyVaultClient(
                     new KeyVaultClient.AuthenticationCallback(azureServiceTokenProvider.KeyVaultTokenCallback));
 
-                var secret = await keyVaultClient.GetSecretAsync("https://azwebkeyvault.vault.azure.net/secrets/DefaultConnection")
+                var secret = await keyVaultClient.GetSecretAsync("https://darksky01.vault.azure.net/secrets/DefaultConnection")
                     .ConfigureAwait(false);
 
                 DefaultConnection = secret.Value;
