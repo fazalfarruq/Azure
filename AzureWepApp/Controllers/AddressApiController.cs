@@ -27,8 +27,8 @@ namespace AddressWebApp.Controllers
             try
             {
                 string term = HttpContext.Request.Query["term"].ToString();
-                //var cities = db.Addresses.Where(a => a.City.Contains(term)).Select(p => p.City).ToList();
-                var cities = _cities.Where(c => c.Contains(term, StringComparison.InvariantCultureIgnoreCase)).ToList();
+                var cities = db.Addresses.Where(a => a.City.Contains(term)).Select(p => p.City).ToList();
+                //var cities = _cities.Where(c => c.Contains(term, StringComparison.InvariantCultureIgnoreCase)).ToList();
                 return Ok(cities);
             }
             catch (Exception e)
