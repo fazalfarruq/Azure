@@ -12,12 +12,8 @@ namespace AddressWebApp.Models
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //var connectionString = GetSecret.DefaultConnectionString().Result;
-            var connectionString = KeyVaultService.GetSecret().Result;
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json");
-            var configuration = builder.Build();
+            var connectionString = GetSecret.DefaultConnectionString().Result;
+            //var connectionString = KeyVaultService.GetSecret().Result;            
             optionsBuilder.UseSqlServer(connectionString);
         }
 
